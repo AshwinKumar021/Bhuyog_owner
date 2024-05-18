@@ -12,7 +12,7 @@ class NotificationCardWidget extends StatelessWidget {
     return Container(
       width: 100.w,
       decoration: Style.customDecoration.buildCustomNotch1(
-          borderColor: Style.colors.primaryAlt,
+          borderColor: Style.colors.grey.withOpacity(.2),
           color: Style.colors.white,
           fill: true,
           radius: 10.sp),
@@ -31,9 +31,9 @@ class NotificationCardWidget extends StatelessWidget {
           children: [
             Text(
               index % 2 == 0
-                  ? 'New Task Assigned!'
+                  ? 'Order Completed!'
                   : index == 1
-                      ? 'Add Fencing to the KMCH Hospital'
+                      ? 'Added Fencing to the KMCH Hospital'
                       : 'Task Reminder !',
               textAlign: TextAlign.left,
               style: Style.textStyles.poppins(

@@ -20,10 +20,10 @@ class _ZoomableImageWidgetState extends State<ZoomableImageWidget> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Style.colors.black),
-        backgroundColor: Style.colors.primaryfade,
-        elevation: 0,
+        backgroundColor: Style.colors.white,
+        elevation: 0.5.sp,
         title: Text(
-          'Zoom',
+          'Ashwin',
           style: Style.textStyles.poppins(
               color: Style.colors.black,
               fontSize: 16.sp,

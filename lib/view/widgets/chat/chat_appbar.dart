@@ -22,7 +22,7 @@ class CustomChatAppBar extends StatelessWidget {
     return AppBar(
         iconTheme: IconThemeData(color: Style.colors.black),
         leadingWidth: 10.w,
-        elevation: 0,
+        elevation: 0.5.sp,
         title: Row(
           children: [
             InkWell(
@@ -105,6 +105,6 @@ class CustomChatAppBar extends StatelessWidget {
           ),
           SizedBox(width: 5.w),
         ],
-        backgroundColor: Style.colors.primaryfade);
+        backgroundColor: Style.colors.white);
   }
 }

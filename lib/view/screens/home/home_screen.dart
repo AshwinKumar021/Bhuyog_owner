@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:changin/utils/constant/variables.dart';
-import 'package:changin/view/screens/dashboard/dashboard_screen.dart';
 import 'package:changin/view/screens/home/notification_page.dart';
 import 'package:changin/view/screens/home/task_details_page.dart';
-import 'package:changin/view/widgets/home/task_card_widget.dart';
+import 'package:changin/view/screens/service/add_properties_page.dart';
+import 'package:changin/view/screens/service/add_service_page.dart';
+import 'package:changin/view/screens/service/property_page.dart';
+import 'package:changin/view/widgets/home/my_properties_card_widget.dart';
 import 'package:changin/view/widgets/home/today_task_card_widget.dart';
-import 'package:changin/view/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -18,31 +19,25 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  TabController? _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController!.dispose();
-    super.dispose();
-  }
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.to(() =>  AddPropertiesPage(isClass: 1,)),
+        tooltip: 'Add Properties',
+        backgroundColor: Style.colors.black,
+        child: Icon(
+          Icons.add,
+          color: Style.colors.white,
+        ),
+      ),
       backgroundColor: Style.colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(8.h),
         child: AppBar(
           backgroundColor: Style.colors.white,
-          elevation: 0.sp,
+          elevation: 0.5.sp,
           leadingWidth: 0,
           leading: const SizedBox.shrink(),
           title: Row(
@@ -52,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen>
                 child: CircleAvatar(
                   radius: 20.sp,
                   backgroundImage: const CachedNetworkImageProvider(
-                      'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1715883719~exp=1715887319~hmac=7ea7a9295b72cc489c60d61d773ac605a80320fa435ac3731b6f415d6da3c3e1&w=740'),
+                      Variables.PROFILE_IAMGE2),
                 ),
               ),
               SizedBox(
@@ -107,15 +102,72 @@ class _HomeScreenState extends State<HomeScreen>
           initialIndex: 1,
           child: ListView(
             children: [
+              SizedBox(height: 2.h),
+              Row(
+                children: [
+                  Text(
+                    'Book Your Services',
+                    style: Style.textStyles.poppins(
+                        color: Style.colors.black.withOpacity(0.7),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.sp),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                      4,
+                      (index) => GestureDetector(
+                            onTap: () {
+                              Get.to(() => const AddServicePage());
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 5.sp),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 25.w,
+                                    height: 7.h,
+                                    decoration: Style.customDecoration
+                                        .buildCustomNotchImage(
+                                            borderColor: Style.colors.grey
+                                                .withOpacity(0.4),
+                                            color: Style.colors.grey
+                                                .withOpacity(0.4),
+                                            fill: true,
+                                            radius: 10.sp,
+                                            image:
+                                                Variables.SERVICES_LIST[index]),
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  Text(
+                                    Variables.SERVICES_TITLE_LIST[index],
+                                    style: Style.textStyles
+                                        .poppins(fontSize: 10.sp),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )),
+                ),
+              ),
               SizedBox(height: 3.h),
               Row(
                 children: [
                   Text(
                     'Ongoing Task',
                     style: Style.textStyles.poppins(
-                        color: Style.colors.black,
+                        color: Style.colors.black.withOpacity(0.7),
                         fontWeight: FontWeight.w600,
-                        fontSize: 12.sp),
+                        fontSize: 14.sp),
                   ),
                   const Spacer(),
                   Icon(
@@ -149,18 +201,18 @@ class _HomeScreenState extends State<HomeScreen>
                               onTap: () {
                                 Get.to(() => const TaskDetailsPage());
                               },
-                              child: const TodayTaskCardWidget()))),
+                              child: TodayTaskCardWidget()))),
                 ),
               ),
               SizedBox(height: 2.h),
               Row(
                 children: [
                   Text(
-                    'All Tasks',
+                    'Your Properties',
                     style: Style.textStyles.poppins(
-                        color: Style.colors.black,
+                        color: Style.colors.black.withOpacity(0.7),
                         fontWeight: FontWeight.w600,
-                        fontSize: 15.sp),
+                        fontSize: 14.sp),
                   ),
                   const Spacer(),
                   Text(
@@ -176,45 +228,24 @@ class _HomeScreenState extends State<HomeScreen>
               SizedBox(
                 height: 1.h,
               ),
-              TabBar(
-                dividerColor: Style.colors.primary,
-                labelStyle: Style.textStyles
-                    .poppins(fontWeight: FontWeight.w600, fontSize: 12.sp),
-                unselectedLabelStyle: Style.textStyles
-                    .poppins(fontWeight: FontWeight.w500, fontSize: 11.sp),
-                indicator: Style.customDecoration.buildBoxDecoration(
-                    color: Style.colors.white, radius: 25.sp),
-                indicatorPadding: EdgeInsets.symmetric(vertical: 5.sp),
-                controller: _tabController,
-                tabs: const [
-                  Tab(text: 'Not Started'),
-                  Tab(text: 'Ongoing'),
-                  Tab(text: 'Completed'),
-                ],
-              ),
-              SizedBox(height: 1.h),
-              SizedBox(
-                height: 50.h,
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    for (int i = 0; i <= 2; i++)
-                      Column(
-                        children: List.generate(
-                            3,
-                            (index) => Padding(
-                                padding: EdgeInsets.symmetric(vertical: 2.sp),
-                                child: InkWell(
-                                  onTap: () {
-                                    Get.to(() => const TaskDetailsPage());
-                                  },
-                                  child: TasksCardWidget(
-                                    index: index,
-                                  ),
-                                ))),
-                      ),
-                  ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                      Variables.SERVICES_LIST.length,
+                      (index) => Padding(
+                          padding: EdgeInsets.only(right: 5.sp),
+                          child: GestureDetector(
+                              onTap: () {
+                                Get.to(() =>  PropertyPage(titleText: Variables.SERVICES_LIST[index],));
+                              },
+                              child: Hero(
+                                tag: Variables.SERVICES_LIST[index],
+                                child: const MyPropertiesCardWidget())))),
                 ),
+              ),
+              SizedBox(
+                height: 1.h,
               ),
             ],
           ),

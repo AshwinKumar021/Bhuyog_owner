@@ -2,7 +2,6 @@ import 'package:changin/controller/home_controller.dart';
 import 'package:changin/utils/constant/variables.dart';
 import 'package:changin/utils/helper/logger.dart';
 import 'package:changin/utils/style/style.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
@@ -29,23 +28,12 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                 ? MaterialStatePropertyAll(Style.colors.green)
                 : MaterialStatePropertyAll(Style.colors.grey),
             fixedSize: MaterialStatePropertyAll(Size(90.w, 5.h))),
-        onPressed: isChecked.value.any((element) => element == true)
-            ? () {
-                if (value == -1) {
-                  homeController.startTimer();
-                  logger.i('Started');
-                  value = 1;
-                } else {
-                  homeController.stopTimer();
-                  logger.i('Stoped');
-
-                  value = -1;
-                }
-              }
-            : null,
+        onPressed: () {
+          Get.back();
+        },
         child: Builder(builder: (context) {
           return Text(
-            value == 1 ? '${homeController.timeContoller.value.text}' : 'START',
+            value == 1 ? homeController.timeContoller.value.text : 'DONE',
             style: Style.textStyles.poppins(
                 color: Style.colors.white,
                 fontSize: 12.sp,
@@ -55,8 +43,8 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
       ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Style.colors.black),
-        backgroundColor: Style.colors.primaryfade,
-        elevation: 0,
+        backgroundColor: Style.colors.white,
+        elevation: 0.5.sp,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -118,12 +106,31 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
         child: ListView(
           children: [
             SizedBox(height: 2.h),
+            Text(
+              'Property',
+              style: Style.textStyles.poppins(
+                  color: Style.colors.black,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w500),
+            ),
+            SizedBox(height: 1.h),
+            Container(
+              height: 17.h,
+              width: 100.w,
+              decoration: Style.customDecoration.buildCustomNotchImage(
+                  borderColor: Style.colors.grey,
+                  color: Style.colors.black,
+                  fill: true,
+                  image: Variables.LAND,
+                  radius: 10.sp),
+            ),
+            SizedBox(height: 2.h),
             Row(
               children: [
                 Text(
                   'Tasks Details',
                   style: Style.textStyles.poppins(
-                      color: Style.colors.primary,
+                      color: Style.colors.black,
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w500),
                 ),
@@ -176,6 +183,18 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
                   ),
                 ),
               ),
+            ),
+            SizedBox(height: 2.h),
+            Row(
+              children: [
+                Text(
+                  'Order Details',
+                  style: Style.textStyles.poppins(
+                      color: Style.colors.black,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
             ),
             SizedBox(height: 0.5.h),
             const Divider(),
@@ -255,149 +274,96 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
             Row(
               children: [
                 Text(
-                  'Work Site Details',
+                  'Staff Details',
                   style: Style.textStyles.poppins(
-                      color: Style.colors.primary,
+                      color: Style.colors.black,
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w500),
                 ),
               ],
             ),
-            SizedBox(height: 1.h),
-            Container(
-              decoration: Style.customDecoration.buildCustomNotch1(
-                  borderColor: Style.colors.greyFade,
-                  fill: true,
-                  color: Style.colors.white,
-                  radius: 8.sp),
-              padding: EdgeInsets.symmetric(vertical: 8.sp, horizontal: 8.sp),
-              width: 100.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Address',
-                        style: Style.textStyles.poppins(
-                            color: Style.colors.black, fontSize: 12.sp),
-                      ),
-                      Icon(
-                        Icons.file_copy_outlined,
-                        color: Style.colors.grey,
-                        size: 15.sp,
-                      )
-                    ],
+            SizedBox(height: 0.5.h),
+            Card(
+              child: ListTile(
+                  leading: const CircleAvatar(
+                    backgroundImage: NetworkImage(Variables.PROFILE_IAMGE1),
                   ),
-                  SizedBox(
-                    height: 0.5.h,
+                  title: Text(
+                    'Martin',
+                    style: Style.textStyles.poppins(),
                   ),
-                  Text(
-                    '620, kikland way, Suite, Thailand, near ubud, bali - Indonesia',
-                    overflow: TextOverflow.clip,
-                    style: Style.textStyles
-                        .poppins(color: Style.colors.grey, fontSize: 11.sp),
-                  ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
-                  Stack(
-                    children: [
-                      Container(
-                        decoration: Style.customDecoration.buildCustomNotch1(
-                            borderColor: Style.colors.greyFade,
-                            fill: true,
-                            color: Style.colors.borderGrey,
-                            radius: 10.sp),
-                        width: 100.w,
-                        height: 15.h,
-                        child: ClipRRect(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.sp)),
-                          child: CachedNetworkImage(
-                            imageUrl: Variables.MAP_NETWORK_IMAGE,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 8.sp,
-                        bottom: 8.sp,
-                        child: Container(
-                          decoration: Style.customDecoration.buildCustomNotch1(
-                              borderColor: Style.colors.grey.withOpacity(.8),
-                              color: Style.colors.greyFade.withOpacity(.5),
-                              fill: true,
-                              radius: 20.sp),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.sp, vertical: 2.sp),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.location_on_rounded,
-                                size: 12.sp,
-                                color: Style.colors.grey,
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Text(
-                                'Location',
-                                style: Style.textStyles.poppins(
-                                    color: Style.colors.black, fontSize: 10.sp),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Phone number',
-                        style: Style.textStyles.poppins(
-                            color: Style.colors.black, fontSize: 12.sp),
-                      ),
-                      const Spacer(),
-                      Icon(
-                        Icons.message,
-                        color: Style.colors.grey,
-                        size: 15.sp,
-                      ),
-                      SizedBox(
-                        width: 3.w,
-                      ),
-                      Icon(
-                        Icons.call,
-                        color: Style.colors.grey,
-                        size: 15.sp,
-                      ),
-                      SizedBox(
-                        width: 1.w,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 0.5.h,
-                  ),
-                  Text(
-                    '9994399973',
-                    overflow: TextOverflow.clip,
-                    style: Style.textStyles
-                        .poppins(color: Style.colors.grey, fontSize: 11.sp),
-                  ),
-                  SizedBox(
-                    height: 0.5.h,
-                  ),
-                ],
-              ),
+                  subtitle: Text('+91 8870X XXXXX'),
+                  trailing: Icon(Icons.badge, color: Style.colors.green)),
             ),
+            SizedBox(height: 2.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.sp, vertical: 5.sp),
+                  decoration: Style.customDecoration.buildCustomNotch1(
+                      borderColor: Style.colors.primary,
+                      color: Style.colors.primary.withOpacity(.1),
+                      fill: true,
+                      radius: 8.sp),
+                  child: Center(
+                    child: Text('Check in'),
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.sp, vertical: 5.sp),
+                  decoration: Style.customDecoration.buildCustomNotch1(
+                      borderColor: Style.colors.green,
+                      color: Style.colors.green.withOpacity(.1),
+                      fill: true,
+                      radius: 8.sp),
+                  child: Center(
+                    child: Text('Worked Hr\'s'),
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.sp, vertical: 5.sp),
+                  decoration: Style.customDecoration.buildCustomNotch1(
+                      borderColor: Style.colors.error,
+                      color: Style.colors.error.withOpacity(.1),
+                      fill: true,
+                      radius: 8.sp),
+                  child: Center(
+                    child: Text('Check out'),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.sp, vertical: 5.sp),
+                  child: Center(
+                    child: Text('07.13 AM'),
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.sp, vertical: 5.sp),
+                  child: Center(
+                    child: Text('2 hours'),
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 18.sp, vertical: 5.sp),
+                  child: Center(
+                    child: Text('09.15 AM'),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

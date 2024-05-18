@@ -5,14 +5,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sizer/sizer.dart';
 
 class TodayTaskCardWidget extends HookWidget {
-  const TodayTaskCardWidget({super.key});
+  double? containerWidth;
+  TodayTaskCardWidget({this.containerWidth, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 85.w,
+      width: containerWidth ?? 85.w,
       decoration: Style.customDecoration.buildCustomNotch1(
-          borderColor: Style.colors.primaryAlt,
+          borderColor: Style.colors.grey.withOpacity(0.3),
           color: Style.colors.white,
           fill: true,
           radius: 10.sp),
@@ -71,6 +72,7 @@ class TodayTaskCardWidget extends HookWidget {
                   ],
                 ),
               ),
+              containerWidth == null ? const SizedBox.shrink() :const Spacer(),
               Container(
                 decoration: Style.customDecoration.buildCustomNotch1(
                     borderColor: Style.colors.primaryLight,

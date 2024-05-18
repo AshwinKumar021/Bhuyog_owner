@@ -1,7 +1,7 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:changin/app_config/app_config.dart';
 import 'package:changin/utils/style/style.dart';
 import 'package:changin/utils/style/theme.dart';
-import 'package:changin/view/screens/auth/login_screen.dart';
 import 'package:changin/view/screens/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (BuildContext context, Orientation orientation,
           DeviceType deviceType) {
-                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarColor: Style.colors.white,
           statusBarBrightness: Brightness.dark,
           systemNavigationBarDividerColor: Colors.transparent,
@@ -30,7 +30,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: AppConfig.APP_NAME,
           theme: appThemeData,
-          home: OnBoardingPage(),
+          home: const OnBoardingPage(),
+          builder: BotToastInit(),
+          navigatorObservers: [BotToastNavigatorObserver()],
         );
       },
     );

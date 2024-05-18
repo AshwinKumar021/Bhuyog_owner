@@ -13,7 +13,7 @@ class NotificationPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Style.colors.black),
-          backgroundColor: Style.colors.primaryfade,
+          backgroundColor: Style.colors.white,
           elevation: 0,
           title: Text(
             'Notification',
@@ -23,14 +23,10 @@ class NotificationPage extends StatelessWidget {
                 fontWeight: FontWeight.w700),
           ),
           actions: [
-            // IconButton(
-            //     onPressed: () {
-            //       Get.to(() => const ScannerPage());
-            //     },
-            //     icon: Icon(Icons.arrow_outward_rounded))
+    
           ],
         ),
-        backgroundColor: Style.colors.primaryfade,
+        backgroundColor: Style.colors.white,
         body: Column(children: <Widget>[
           SizedBox(height: 1.h),
           // paymentController

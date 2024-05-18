@@ -1,6 +1,7 @@
 import 'package:changin/utils/constant/variables.dart';
+import 'package:changin/utils/helper/extensions.dart';
 import 'package:changin/utils/style/style.dart';
-import 'package:changin/view/screens/calendar/calendar_screen.dart';
+import 'package:changin/view/screens/task_status/task_status_screen.dart';
 import 'package:changin/view/screens/chat/chat_list_screen.dart';
 import 'package:changin/view/screens/home/home_screen.dart';
 import 'package:changin/view/screens/profile/profile_screen.dart';
@@ -21,7 +22,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final pages = [
     const HomeScreen(),
-    const CalendarScreen(),
+    const TaskStatusScreen(),
     const ChatListScreen(),
     const ProfileScreen()
   ];
@@ -35,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         if (backButtonPressTime == null ||
             DateTime.now().difference(backButtonPressTime!) >
                 const Duration(seconds: 2)) {
-          // Variables.PLEASE_PRESS_BACK_TO_EXIT.showText();
+          Variables.PLEASE_PRESS_BACK_TO_EXIT.showText();
 
           backButtonPressTime = DateTime.now();
         } else {
@@ -58,7 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               .poppins(color: Style.colors.primary, fontSize: 11.sp),
           showSelectedLabels: true,
           unselectedItemColor: Style.colors.black,
-          backgroundColor: Style.colors.primary,
+          backgroundColor: Style.colors.primaryfade,
           currentIndex: pageIndex,
           onTap: (index) {
             setState(() {
@@ -76,7 +77,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               icon: pageIndex == 1
                   ? bottomIcon(Variables.CALENDAR_ICON, null, true)
                   : bottomIcon(Variables.CALENDAR_ICON, null, false),
-              label: 'Calendar',
+              label: 'Orders',
             ),
             BottomNavigationBarItem(
               icon: pageIndex == 2
@@ -103,7 +104,8 @@ Widget bottomIcon(String? Imagepath, Color? clr, bool value) {
     child: Container(
       padding: EdgeInsets.all(5.sp),
       decoration: Style.customDecoration.buildBoxDecoration(
-          color: value ? Style.colors.white : Style.colors.primary,
+          color:
+              value ? Style.colors.white : Style.colors.black.withOpacity(.0),
           radius: 40.sp),
       child: Image.asset(
         '$Imagepath',

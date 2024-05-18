@@ -83,11 +83,11 @@ class _Decoration {
 
   ShapeDecoration buildAccoutsDecoration() {
     return ShapeDecoration(
-      gradient: const LinearGradient(
-        begin: Alignment(0.97, -0.26),
-        end: Alignment(-0.97, 0.26),
+      gradient: LinearGradient(
+        begin: const Alignment(0.97, -0.26),
+        end: const Alignment(-0.97, 0.26),
         colors: [
-          Color(0xFFEAEFFF),
+          Style.colors.primaryAlt,
           Colors.white,
         ],
       ),
@@ -128,9 +128,25 @@ class _Decoration {
     );
   }
 
+  BoxDecoration buildCustomNotchImage(
+      {color, radius, fill, borderColor, String? image}) {
+    return BoxDecoration(
+        border: fill
+            ? Border.all(
+                color: borderColor, width: 1.5, style: BorderStyle.solid)
+            : Border.all(),
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
+        image: DecorationImage(
+            image: CachedNetworkImageProvider(
+              image!,
+            ),
+            fit: BoxFit.fill));
+  }
+
   BoxDecoration buildCustomlogo(image) {
     return BoxDecoration(
-      color: Colors.white,
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
             blurRadius: 2.sp,

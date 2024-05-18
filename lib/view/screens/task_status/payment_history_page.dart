@@ -1,28 +1,22 @@
+import 'package:changin/utils/constant/variables.dart';
 import 'package:changin/utils/style/style.dart';
-import 'package:changin/view/widgets/chat/chat_shimmer.dart';
 import 'package:flutter/material.dart';
-
 import 'package:sizer/sizer.dart';
 
-class ChatListScreen extends StatefulWidget {
-  const ChatListScreen({super.key});
+import '../../widgets/task/payment_history_card_widget.dart';
 
-  @override
-  State<ChatListScreen> createState() => _ChatListScreenState();
-}
+class PaymentHistoryPage extends StatelessWidget {
+  const PaymentHistoryPage({super.key});
 
-class _ChatListScreenState extends State<ChatListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Style.colors.black),
         backgroundColor: Style.colors.white,
-        elevation: 0.5.sp,
-        leading: Icon(null),
-        leadingWidth: 0.w,
+        elevation: 0,
+      iconTheme: IconThemeData(color: Style.colors.black),
         title: Text(
-          'Chats',
+          'Payment History',
           style: Style.textStyles.poppins(
               color: Style.colors.black,
               fontSize: 16.sp,
@@ -30,10 +24,13 @@ class _ChatListScreenState extends State<ChatListScreen> {
         ),
       ),
       body: ListView.builder(
-          itemCount: 10,
+          itemCount: 13,
           itemBuilder: (context, index) {
-            return UserCard(
-              index: index,
+            return PaymentHistoryCardWidget(
+              amount: '500',
+              refId: '23523SERWRQ3242',
+              time: '12.37 PM',
+              backgroundUrl: Variables.BANK_IMAGE,
             );
           }),
     );

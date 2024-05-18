@@ -34,8 +34,8 @@ class ProfileViewEditPage extends HookWidget {
               )),
           leadingWidth: 12.w,
           iconTheme: IconThemeData(color: Style.colors.black),
-          backgroundColor: Style.colors.primaryfade,
-          elevation: 0,
+          backgroundColor: Style.colors.white,
+          elevation: 0.5.sp,
           title: Text(
             isEdit ? 'Edit Profile' : 'Profile Information',
             style: Style.textStyles.poppins(

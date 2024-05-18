@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:changin/utils/constant/variables.dart';
 import 'package:changin/utils/style/style.dart';
+import 'package:changin/view/screens/auth/login_screen.dart';
 import 'package:changin/view/screens/dashboard/dashboard_screen.dart';
 import 'package:changin/view/screens/wallet.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +126,7 @@ class _OnBoardingPageState extends State<OnBoardingPage>
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute<void>(
-                          builder: (context) => const DashboardScreen(),
+                          builder: (context) =>  LoginScreen(),
                         ),
                       );
                     },

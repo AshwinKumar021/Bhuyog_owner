@@ -1,5 +1,6 @@
 import 'package:changin/utils/style/style.dart';
 import 'package:changin/view/screens/auth/login_screen.dart';
+import 'package:changin/view/screens/task_status/payment_history_page.dart';
 import 'package:changin/view/screens/profile/profile_edit_screen.dart';
 import 'package:changin/view/widgets/loader.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -18,8 +19,8 @@ class ProfileScreen extends StatelessWidget {
         leading: Icon(null),
         leadingWidth: 0.w,
         iconTheme: IconThemeData(color: Style.colors.black),
-        backgroundColor: Style.colors.primaryfade,
-        elevation: 0,
+        backgroundColor: Style.colors.white,
+        elevation: 0.5.sp,
         title: Text(
           'Profile',
           style: Style.textStyles.poppins(
@@ -88,8 +89,8 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 3.h),
-            gradientCardSample(),
-            SizedBox(height: 2.h),
+            // gradientCardSample(),
+            // SizedBox(height: 2.h),
             ListTile(
               onTap: () {
                 Get.to(() => ProfileViewEditPage(
@@ -111,12 +112,15 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             ListTile(
+              onTap: () {
+                Get.to(() => PaymentHistoryPage());
+              },
               leading: Icon(
                 Icons.history,
                 color: Style.colors.black,
               ),
               title: Text(
-                'History',
+                'Payment History',
                 style: Style.textStyles
                     .poppins(color: Style.colors.black, fontSize: 12.sp),
               ),
@@ -171,9 +175,10 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: (){
-                CustomLoader.showLoadingDialog(context, message: 'Logging out..');
-                Future.delayed(const Duration(seconds: 2),(){
+              onTap: () {
+                CustomLoader.showLoadingDialog(context,
+                    message: 'Logging out..');
+                Future.delayed(const Duration(seconds: 2), () {
                   Get.offAll(LoginScreen());
                 });
               },
