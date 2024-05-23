@@ -58,6 +58,9 @@ static const String PROFILE_IAMGE2='https://img.freepik.com/free-photo/young-bea
   static const List<String> SERVICES_LIST=[PLUMBING,SHIFTING,WASHING,GLASS_CUTTING]; 
   static const List<String> SERVICES_TITLE_LIST=['Plumbing','Shifting','Washing','Site Cleaning']; 
   static const String BANK_IMAGE='https://static.vecteezy.com/system/resources/thumbnails/002/249/718/small/bank-building-icon-finance-symbol-illustration-for-web-and-mobil-app-on-grey-background-free-vector.jpg';
+  static const List<String> ALL_SERVICES_LIST=[PLUMBING,SHIFTING,WASHING,GLASS_CUTTING,PLUMBING,SHIFTING,WASHING,GLASS_CUTTING,PLUMBING,SHIFTING,WASHING,GLASS_CUTTING,PLUMBING,SHIFTING,WASHING,GLASS_CUTTING,]; 
+  static const List<String> All_SERVICES_TITLE_LIST=['Plumbing','Shifting','Washing','Site Cleaning','Plumbing','Shifting','Washing','Site Cleaning','Plumbing','Shifting','Washing','Site Cleaning','Plumbing','Shifting','Washing','Site Cleaning']; 
+ 
   //Text
   static const String MESSAGES = 'Message';
   static const String PLEASE_PRESS_BACK_TO_EXIT = 'Press back to exit';

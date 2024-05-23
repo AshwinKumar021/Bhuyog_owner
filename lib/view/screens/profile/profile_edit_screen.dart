@@ -118,52 +118,7 @@ class ProfileViewEditPage extends HookWidget {
                                   height: 3.h,
                                 ),
                                 Text(
-                                  'JOINED DATE',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
                                   'LOCATION',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
-                                  'EDUCATION',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
-                                  'CERTIFICATION',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
-                                  'HANDLING_CLASS',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
-                                  'PERFORMANCE',
                                   style: Style.textStyles.poppins(
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w600),
@@ -177,7 +132,7 @@ class ProfileViewEditPage extends HookWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: List.generate(
-                                  8,
+                                  3,
                                   (index) => Column(
                                         children: [
                                           Padding(
@@ -219,68 +174,10 @@ class ProfileViewEditPage extends HookWidget {
                                   height: 3.h,
                                 ),
                                 Text(
-                                  '08 AUG - 2023',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
                                   'East Corb',
                                   style: Style.textStyles.poppins(
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
-                                  'MCA ',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
-                                  '3',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
-                                  '5',
-                                  style: Style.textStyles.poppins(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Row(
-                                  children: List.generate(
-                                    5,
-                                    (starIndex) {
-                                      return Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 0.sp),
-                                        child: Icon(
-                                          Icons.star,
-                                          color: starIndex != 4
-                                              ? Style.colors.yellow
-                                              : Style.colors.grey
-                                                  .withOpacity(0.5),
-                                          size: 20.sp,
-                                        ),
-                                      );
-                                    },
-                                  ),
                                 ),
                               ],
                             ),
@@ -297,28 +194,28 @@ class ProfileViewEditPage extends HookWidget {
                             height: 2.h,
                           ),
                           Text(
-                            'EMAIL_ID',
+                            'EMAIL ID',
                             style: Style.textStyles.poppins(
                                 fontSize: 12.sp, fontWeight: FontWeight.w600),
                           ),
                           CustomTextField(
                               height: true,
                               controller: _emailController,
-                              hintText: 'EMAIL_ID',
+                              hintText: 'EMAIL ID',
                               hasError: hasError,
                               isValid: false),
                           SizedBox(
                             height: 1.h,
                           ),
                           Text(
-                            'CONTACT_NUMBER',
+                            'CONTACT NUMBER',
                             style: Style.textStyles.poppins(
                                 fontSize: 12.sp, fontWeight: FontWeight.w600),
                           ),
                           CustomTextField(
                               height: true,
                               controller: _contactController,
-                              hintText: 'CONTACT_NUMBER',
+                              hintText: 'CONTACT NUMBER',
                               hasError: hasError,
                               isValid: false),
                           SizedBox(
@@ -338,17 +235,6 @@ class ProfileViewEditPage extends HookWidget {
                           SizedBox(
                             height: 1.h,
                           ),
-                          Text(
-                            'EDUCATION',
-                            style: Style.textStyles.poppins(
-                                fontSize: 12.sp, fontWeight: FontWeight.w600),
-                          ),
-                          CustomTextField(
-                              height: true,
-                              controller: _educationController,
-                              hintText: 'EDUCATION',
-                              hasError: hasError,
-                              isValid: false),
                         ],
                       ),
                     ),

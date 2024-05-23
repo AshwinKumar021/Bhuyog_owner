@@ -1,13 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:changin/utils/constant/variables.dart';
+import 'package:changin/view/screens/booking/booking_page.dart';
 import 'package:changin/view/screens/home/notification_page.dart';
 import 'package:changin/view/screens/home/task_details_page.dart';
 import 'package:changin/view/screens/service/add_properties_page.dart';
-import 'package:changin/view/screens/service/add_service_page.dart';
+import 'package:changin/view/screens/booking/add_service_page.dart';
 import 'package:changin/view/screens/service/property_page.dart';
 import 'package:changin/view/widgets/home/my_properties_card_widget.dart';
 import 'package:changin/view/widgets/home/today_task_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../utils/style/style.dart';
@@ -24,7 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() =>  AddPropertiesPage(isClass: 1,)),
+        onPressed: () => Get.to(() => AddPropertiesPage(
+              isClass: 1,
+            )),
         tooltip: 'Add Properties',
         backgroundColor: Style.colors.black,
         child: Icon(
@@ -75,23 +79,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 10.sp, top: 5.sp),
-              child: CircleAvatar(
-                backgroundColor: Style.colors.primaryfade,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.notifications_none_outlined,
-                    color: Style.colors.black,
-                    size: 18.sp,
-                  ),
-                  color: Style.colors.black,
-                  onPressed: () {
-                    Get.to(() => const NotificationPage());
-                  },
+            CircleAvatar(
+              backgroundColor: Style.colors.white,
+              child: IconButton(
+                icon: Icon(
+                  Icons.notifications_none_outlined,
+                  color: Style.colors.primary,
+                  size: 18.sp,
                 ),
+                color: Style.colors.black,
+                onPressed: () {
+                  Get.to(() => const NotificationPage());
+                },
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -102,6 +103,94 @@ class _HomeScreenState extends State<HomeScreen> {
           initialIndex: 1,
           child: ListView(
             children: [
+              SizedBox(height: 1.5.h),
+              Row(
+                children: [
+                  Text(
+                    'Your Properties',
+                    style: Style.textStyles.poppins(
+                        color: Style.colors.black.withOpacity(0.7),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.sp),
+                  ),
+                  const Spacer(),
+                  Text(
+                    'See All',
+                    style: Style.textStyles.poppins(
+                        decoration: TextDecoration.underline,
+                        color: Style.colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 11.sp),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                    Variables.SERVICES_LIST.length,
+                    (index) => Padding(
+                      padding: EdgeInsets.only(right: 5.sp),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(() => PropertyPage(
+                                titleText: Variables.SERVICES_LIST[index],
+                              ));
+                        },
+                        child: Hero(
+                            tag: Variables.SERVICES_LIST[index],
+                            child: const MyPropertiesCardWidget()),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 2.h),
+              Row(
+                children: [
+                  Text(
+                    'Ongoing Task',
+                    style: Style.textStyles.poppins(
+                        color: Style.colors.black.withOpacity(0.7),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.sp),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    Icons.calendar_today,
+                    size: 12.sp,
+                    color: Style.colors.black,
+                  ),
+                  SizedBox(
+                    width: 1.w,
+                  ),
+                  Text(
+                    '23-AUG 2024',
+                    style: Style.textStyles.poppins(
+                        color: Style.colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 11.sp),
+                  )
+                ],
+              ),
+              SizedBox(height: 1.5.h),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                      4,
+                      (index) => Padding(
+                          padding: EdgeInsets.only(right: 5.sp),
+                          child: GestureDetector(
+                              onTap: () {
+                                Get.to(() => const TaskDetailsPage());
+                              },
+                              child: TodayTaskCardWidget()))),
+                ),
+              ),
               SizedBox(height: 2.h),
               Row(
                 children: [
@@ -113,6 +202,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 14.sp),
                   ),
                   const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const BookingPage());
+                    },
+                    child: Text(
+                      'See All',
+                      style: Style.textStyles.poppins(
+                          decoration: TextDecoration.underline,
+                          color: Style.colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 11.sp),
+                    ),
+                  )
                 ],
               ),
               SizedBox(
@@ -158,94 +260,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           )),
                 ),
-              ),
-              SizedBox(height: 3.h),
-              Row(
-                children: [
-                  Text(
-                    'Ongoing Task',
-                    style: Style.textStyles.poppins(
-                        color: Style.colors.black.withOpacity(0.7),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14.sp),
-                  ),
-                  const Spacer(),
-                  Icon(
-                    Icons.calendar_today,
-                    size: 12.sp,
-                    color: Style.colors.black,
-                  ),
-                  SizedBox(
-                    width: 1.w,
-                  ),
-                  Text(
-                    '23-AUG 2024',
-                    style: Style.textStyles.poppins(
-                        color: Style.colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 11.sp),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                      4,
-                      (index) => Padding(
-                          padding: EdgeInsets.only(right: 5.sp),
-                          child: GestureDetector(
-                              onTap: () {
-                                Get.to(() => const TaskDetailsPage());
-                              },
-                              child: TodayTaskCardWidget()))),
-                ),
-              ),
-              SizedBox(height: 2.h),
-              Row(
-                children: [
-                  Text(
-                    'Your Properties',
-                    style: Style.textStyles.poppins(
-                        color: Style.colors.black.withOpacity(0.7),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14.sp),
-                  ),
-                  const Spacer(),
-                  Text(
-                    'See All',
-                    style: Style.textStyles.poppins(
-                        decoration: TextDecoration.underline,
-                        color: Style.colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 11.sp),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 1.h,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                      Variables.SERVICES_LIST.length,
-                      (index) => Padding(
-                          padding: EdgeInsets.only(right: 5.sp),
-                          child: GestureDetector(
-                              onTap: () {
-                                Get.to(() =>  PropertyPage(titleText: Variables.SERVICES_LIST[index],));
-                              },
-                              child: Hero(
-                                tag: Variables.SERVICES_LIST[index],
-                                child: const MyPropertiesCardWidget())))),
-                ),
-              ),
-              SizedBox(
-                height: 1.h,
               ),
             ],
           ),

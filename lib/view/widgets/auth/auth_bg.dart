@@ -25,17 +25,6 @@ class AuthBgScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: Padding(
-          padding:  EdgeInsets.only(left:  9.w),
-          child: ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor: const MaterialStatePropertyAll(
-                      Colors.black),
-                  fixedSize:
-                      MaterialStatePropertyAll(Size(100.w, 6.h))),
-              onPressed: onSubmit,
-              child: Text(buttonText)),
-        ),
         backgroundColor: Style.colors.white,
         body: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
@@ -58,9 +47,7 @@ class AuthBgScreen extends StatelessWidget {
               //     )
               //   ],
               // ),
-              SizedBox(
-                height: 3.h,
-              ),
+
               Image.asset(
                 bgImage,
                 width: 100.w,
@@ -70,7 +57,7 @@ class AuthBgScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: 8.w,
                   right: 8.w,
-                  top: 3.h,
+                  top: 0.h,
                   bottom: 15.h,
                 ),
                 child: Column(
@@ -85,13 +72,20 @@ class AuthBgScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 4.h,
+                      height: 1.h,
                     ),
                     form,
                     SizedBox(
-                      height: 3.h,
+                      height: 8.h,
                     ),
-                   
+                    ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                const MaterialStatePropertyAll(Colors.black),
+                            fixedSize:
+                                MaterialStatePropertyAll(Size(100.w, 6.h))),
+                        onPressed: onSubmit,
+                        child: Text(buttonText))
                   ],
                 ),
               ),

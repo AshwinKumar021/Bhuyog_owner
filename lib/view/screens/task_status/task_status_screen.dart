@@ -40,7 +40,7 @@ class _TaskStatusScreenState extends State<TaskStatusScreen>
           leading: const Icon(null),
           leadingWidth: 0.w,
           title: Text(
-            'Order Status',
+            'Tasks Status',
             style: Style.textStyles.poppins(
                 color: Style.colors.black,
                 fontSize: 16.sp,
@@ -50,13 +50,15 @@ class _TaskStatusScreenState extends State<TaskStatusScreen>
         backgroundColor: Style.colors.white,
         body: Column(children: <Widget>[
           TabBar(
-            dividerColor: Style.colors.primary,
+            dividerColor: Style.colors.black,
             labelStyle: Style.textStyles.poppins(
                 fontWeight: FontWeight.w600,
                 fontSize: 12.sp,
                 color: Style.colors.black),
-            unselectedLabelStyle: Style.textStyles
-                .poppins(fontWeight: FontWeight.w500, fontSize: 11.sp),
+            unselectedLabelStyle: Style.textStyles.poppins(
+                color: Style.colors.grey,
+                fontWeight: FontWeight.w500,
+                fontSize: 11.sp),
             indicatorWeight: 3,
             indicatorColor: Style.colors.black,
             indicatorSize: TabBarIndicatorSize.tab,
@@ -168,15 +170,17 @@ class _TaskStatusScreenState extends State<TaskStatusScreen>
                 itemCount: 8,
                 itemBuilder: (context, index) {
                   return Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 5.sp, horizontal: 5.sp),
-                      child: GestureDetector(
-                          onTap: () {
-                            Get.to(() => TaskDetailsPage());
-                          },
-                          child: TodayTaskCardWidget(
-                            containerWidth: 100.w,
-                          )));
+                    padding:
+                        EdgeInsets.symmetric(vertical: 5.sp, horizontal: 5.sp),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const TaskDetailsPage());
+                      },
+                      child: TodayTaskCardWidget(
+                        containerWidth: 100.w,
+                      ),
+                    ),
+                  );
                 },
               ),
             ),

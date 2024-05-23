@@ -148,11 +148,11 @@ class _Decoration {
     return BoxDecoration(
         color: Colors.white,
         boxShadow: [
-          BoxShadow(
-            blurRadius: 2.sp,
-            color: Style.colors.black.withOpacity(.2),
-            offset: Offset(0.sp, 2.sp),
-          ),
+          // BoxShadow(
+          //   blurRadius: 2.sp,
+          //   color: Style.colors.black.withOpacity(.2),
+          //   offset: Offset(0.sp, 2.sp),
+          // ),
         ],
         borderRadius: BorderRadius.all(Radius.circular(10.sp)),
         image: DecorationImage(

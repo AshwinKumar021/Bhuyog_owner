@@ -59,7 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               .poppins(color: Style.colors.primary, fontSize: 11.sp),
           showSelectedLabels: true,
           unselectedItemColor: Style.colors.black,
-          backgroundColor: Style.colors.primaryfade,
+          backgroundColor: Style.colors.white,
           currentIndex: pageIndex,
           onTap: (index) {
             setState(() {
@@ -77,7 +77,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               icon: pageIndex == 1
                   ? bottomIcon(Variables.CALENDAR_ICON, null, true)
                   : bottomIcon(Variables.CALENDAR_ICON, null, false),
-              label: 'Orders',
+              label: 'Tasks',
             ),
             BottomNavigationBarItem(
               icon: pageIndex == 2

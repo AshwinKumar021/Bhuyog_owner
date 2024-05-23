@@ -25,7 +25,7 @@ class MpinPage extends HookWidget {
     const fillColor = Color.fromRGBO(243, 246, 249, 0);
 
     final defaultPinTheme = PinTheme(
-      width: 56,
+      width: 70.sp,
       height: 56,
       textStyle: Style.textStyles.poppins(
         fontSize: 22.sp,
@@ -40,65 +40,75 @@ class MpinPage extends HookWidget {
     return AuthBgScreen(
       bgImage: Variables.LOGIN,
       hideButton: isSubmitted.value,
-      title: 'Enter Your Mpin',
+      title: 'Enter Your pin',
       buttonText: 'Next',
       form: Form(
         key: _formKey,
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Pinput(
-                controller: pinController,
-                focusNode: focusNode,
-                androidSmsAutofillMethod:
-                    AndroidSmsAutofillMethod.smsUserConsentApi,
-                listenForMultipleSmsOnAndroid: true,
-                defaultPinTheme: defaultPinTheme,errorTextStyle: Style.textStyles.poppins(color: Style.colors.error,fontSize: 15.sp,fontWeight: FontWeight.w700),
-                separatorBuilder: (index) => const SizedBox(width: 8),
-                validator: (value) {
-                  return value == '2222' ? null : 'Pin is incorrect';
-                },
-                // onClipboardFound: (value) {
-                //   debugPrint('onClipboardFound: $value');
-                //   pinController.setText(value);
-                // },
-                hapticFeedbackType: HapticFeedbackType.lightImpact,
-                onCompleted: (pin) {
-                  debugPrint('onCompleted: $pin');
-                },
-                onChanged: (value) {
-                  debugPrint('onChanged: $value');
-                },
-                cursor: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 9),
-                      width: 22,
-                      height: 1,
-                      color: focusedBorderColor,
+              Center(
+                child: Pinput(
+                  controller: pinController,
+                  focusNode: focusNode,
+                  androidSmsAutofillMethod:
+                      AndroidSmsAutofillMethod.smsUserConsentApi,
+                  listenForMultipleSmsOnAndroid: true,
+                  defaultPinTheme: defaultPinTheme,
+                  errorTextStyle: Style.textStyles.poppins(
+                      color: Style.colors.error,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w700),
+                  separatorBuilder: (index) => const SizedBox(width: 8),
+                  validator: (value) {
+                    return value == '2222' ? null : 'Pin is incorrect';
+                  },
+                  // onClipboardFound: (value) {
+                  //   debugPrint('onClipboardFound: $value');
+                  //   pinController.setText(value);
+                  // },
+                  hapticFeedbackType: HapticFeedbackType.lightImpact,
+                  onCompleted: (pin) {
+                    debugPrint('onCompleted: $pin');
+                  },
+                  onChanged: (value) {
+                    debugPrint('onChanged: $value');
+                  },
+                  cursor: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 9),
+                        width: 22,
+                        height: 1,
+                        color: focusedBorderColor,
+                      ),
+                    ],
+                  ),
+                  focusedPinTheme: defaultPinTheme.copyWith(
+                    decoration: defaultPinTheme.decoration!.copyWith(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: focusedBorderColor),
                     ),
-                  ],
-                ),
-                focusedPinTheme: defaultPinTheme.copyWith(
-                  decoration: defaultPinTheme.decoration!.copyWith(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: focusedBorderColor),
                   ),
-                ),
-                submittedPinTheme: defaultPinTheme.copyWith(
-                  decoration: defaultPinTheme.decoration!.copyWith(
-                    color: fillColor,
-                    borderRadius: BorderRadius.circular(19),
-                    border: Border.all(color: focusedBorderColor),
+                  submittedPinTheme: defaultPinTheme.copyWith(
+                    decoration: defaultPinTheme.decoration!.copyWith(
+                      color: fillColor,
+                      borderRadius: BorderRadius.circular(19),
+                      border: Border.all(color: focusedBorderColor),
+                    ),
                   ),
-                ),
-                errorPinTheme: defaultPinTheme.copyBorderWith(
-                  border: Border.all(color: Colors.redAccent),
+                  errorPinTheme: defaultPinTheme.copyBorderWith(
+                    border: Border.all(color: Colors.redAccent),
+                  ),
                 ),
               ),
-              SizedBox(height: 4.h,)
+              SizedBox(
+                height: 7
+                .h,
+              )
             ],
           ),
         ),
@@ -110,7 +120,7 @@ class MpinPage extends HookWidget {
         hasError.value = !(_formKey.currentState?.validate() ?? false);
         if (!hasError.value) {
           _formKey.currentState?.save();
-          if(pinController.value.text.isNotEmpty){
+          if (pinController.value.text.isNotEmpty) {
             Get.to(const DashboardScreen());
           }
           // ConnectivityResult res = await Connectivity().checkConnectivity();
